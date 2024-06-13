@@ -2,5 +2,11 @@
   "meta": {
     "title": "Docker Reply",
     "description": "docker 镜像加速服务"
+  },
+  "theme": {
+    "toggle": "切换主题",
+    "light": "亮色",
+    "dark": "深色",
+    "system": "系统"
   }
 }
