@@ -15,8 +15,9 @@ export function useIntl() {
   const { lang } = useContext(IntlContext)
 
   const formatMessage = useCallback(
-    (key: string, defaultMessage: any) => {
-      return get(getLocale(lang as Locale), key, defaultMessage)
+    async (key: string, defaultMessage: any) => {
+      const currentLocale = await getLocale(lang as Locale)
+      return get(currentLocale, key, defaultMessage)
     },
     [lang]
   )

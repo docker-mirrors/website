@@ -2,11 +2,11 @@ import { useIntl } from './IntlProvider'
 
 export type IntlProps = {
   children?: React.ReactNode
-  key: string
+  locale: string
 }
 
-export const Intl = ({ children, key }: IntlProps) => {
+export const Intl = ({ children, locale }: IntlProps) => {
   const [, { formatMessage }] = useIntl()
 
-  return <>{formatMessage(key, children)}</>
+  return <>{formatMessage(locale, children)}</>
 }
