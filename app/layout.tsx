@@ -34,7 +34,6 @@ export type RootLayoutProps = Readonly<{
 }>
 
 export default function RootLayout({ children, params }: RootLayoutProps) {
-  console.log('RootLayout', params)
   return (
     <html lang={params.lang ?? defaultLocales} suppressHydrationWarning>
       <head />

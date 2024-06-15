@@ -15,7 +15,7 @@ import dayjs from 'dayjs'
 export default async function NotFound() {
   const repo = await fetch(
     `${process.env.GITHUB_HOST}/repos/docker-reply/website`,
-    { cache: 'force-cache' }
+    { next: { revalidate: 60 * 3 * 60 * 1000 } }
   )
     .then((response) => response.json())
     .then((response) => (!response.message ? response : {}))
