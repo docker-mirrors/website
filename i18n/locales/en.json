@@ -8,5 +8,13 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "search": {
+    "theme": "Theme",
+    "notFound": "No images found.",
+    "placeholder": "Search images...",
+    "loading": "Search...",
+    "trustedContent": "Trusted Content",
+    "community": "Community"
   }
 }

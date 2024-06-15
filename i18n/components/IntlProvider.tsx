@@ -26,7 +26,7 @@ export function useIntl() {
   }, [lang, computedLocale])
 
   const formatMessage = useCallback(
-    (key: string, defaultMessage: any) => {
+    (key: string, defaultMessage?: any) => {
       return get(locale, key, defaultMessage)
     },
     [locale]

@@ -8,5 +8,13 @@
     "light": "亮色",
     "dark": "深色",
     "system": "系统"
+  },
+  "search": {
+    "theme": "主题",
+    "notFound": "未找到匹配镜像.",
+    "placeholder": "搜索镜像...",
+    "loading": "搜索...",
+    "trustedContent": "认证",
+    "community": "社区"
   }
 }
