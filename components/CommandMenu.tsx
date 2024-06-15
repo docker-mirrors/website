@@ -4,13 +4,16 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { DialogProps } from '@radix-ui/react-alert-dialog'
 import {
-  CircleIcon,
-  FileIcon,
+  LayersIcon,
+  GearIcon,
   LaptopIcon,
   MoonIcon,
-  SunIcon
+  SunIcon,
+  PersonIcon,
+  Half2Icon
 } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
+import { useDebounceFn } from 'ahooks'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -23,12 +26,36 @@ import {
   CommandList,
   CommandSeparator
 } from '@/components/ui/command'
-import { Intl } from '@/i18n'
+import { Intl, useIntl } from '@/i18n'
+import { searchImages } from '@/app/actions'
+
+export function useSearch() {
+  const [searchResult, setSearchResult] =
+    React.useState<Awaited<ReturnType<typeof searchImages>>>()
+  const [optimisticSearchResult, addOptimisticLoading] = React.useOptimistic(
+    { ...searchResult, loading: false },
+    (state, loading: boolean) => ({ ...state, loading })
+  )
+
+  const { run: handleSearch } = useDebounceFn(
+    async (searchSources: string) => {
+      React.startTransition(() => addOptimisticLoading(true))
+      const currentSearchResult = await searchImages(searchSources)
+      console.log(currentSearchResult)
+      setSearchResult(currentSearchResult)
+    },
+    { wait: 500 }
+  )
+
+  return [optimisticSearchResult, handleSearch] as const
+}
 
 export function CommandMenu({ ...props }: DialogProps) {
   const router = useRouter()
   const [open, setOpen] = React.useState(false)
   const { setTheme } = useTheme()
+  const [, { formatMessage }] = useIntl()
+  const [{ loading, stores = [], communities = [] }, handleSearch] = useSearch()
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -66,52 +93,84 @@ export function CommandMenu({ ...props }: DialogProps) {
         onClick={() => setOpen(true)}
         {...props}
       >
-        <span className="hidden lg:inline-flex">Search documentation...</span>
-        <span className="inline-flex lg:hidden">Search...</span>
+        <span className="hidden lg:inline-flex">
+          <Intl locale="search.placeholder" />
+        </span>
+        <span className="inline-flex lg:hidden">
+          <Intl locale="search.loading" />
+        </span>
         <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput
+          placeholder={formatMessage('search.placeholder')}
+          onValueChange={handleSearch}
+        />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          {/* <CommandGroup heading="Links">
-            {docsConfig.mainNav
-              .filter((navitem) => !navitem.external)
-              .map((navItem) => (
+          <CommandEmpty>
+            <Intl locale="search.notFound" />
+          </CommandEmpty>
+          {stores.length ? (
+            <CommandGroup
+              heading={
+                <span className="flex items-center">
+                  <GearIcon className="mr-2 h-4 w-4" />
+                  <Intl locale="search.trustedContent" />
+                </span>
+              }
+            >
+              {stores.map(({ name, id, type }) => (
                 <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
+                  key={id}
+                  value={name}
                   onSelect={() => {
-                    runCommand(() => router.push(navItem.href as string))
+                    runCommand(() =>
+                      router.push(`/${type}/${encodeURIComponent(id)}`)
+                    )
                   }}
                 >
-                  <FileIcon className="mr-2 h-4 w-4" />
-                  {navItem.title}
-                </CommandItem>
-              ))}
-          </CommandGroup>
-          {docsConfig.sidebarNav.map((group) => (
-            <CommandGroup key={group.title} heading={group.title}>
-              {group.items.map((navItem) => (
-                <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
-                  onSelect={() => {
-                    runCommand(() => router.push(navItem.href as string))
-                  }}
-                >
-                  <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                    <CircleIcon className="h-3 w-3" />
-                  </div>
-                  {navItem.title}
+                  <LayersIcon className="mr-2 h-4 w-4" />
+                  {name}
                 </CommandItem>
               ))}
             </CommandGroup>
-          ))} */}
+          ) : null}
+          {communities.length ? (
+            <CommandGroup
+              heading={
+                <span className="flex items-center">
+                  <PersonIcon className="mr-2 h-4 w-4" />
+                  <Intl locale="search.community" />
+                </span>
+              }
+            >
+              {communities.map(({ name, id, type }) => (
+                <CommandItem
+                  key={id}
+                  value={name}
+                  onSelect={() => {
+                    runCommand(() =>
+                      router.push(`/${type}/${encodeURIComponent(id)}`)
+                    )
+                  }}
+                >
+                  <LayersIcon className="mr-2 h-4 w-4" />
+                  {name}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          ) : null}
           <CommandSeparator />
-          <CommandGroup heading="Theme">
+          <CommandGroup
+            heading={
+              <span className="flex items-center">
+                <Half2Icon className="mr-2 h-4 w-4" />
+                <Intl locale="search.theme" />
+              </span>
+            }
+          >
             <CommandItem onSelect={() => runCommand(() => setTheme('light'))}>
               <SunIcon className="mr-2 h-4 w-4" />
               <Intl locale="theme.light" />
