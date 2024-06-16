@@ -15,6 +15,27 @@
     "placeholder": "Search images...",
     "loading": "Search...",
     "trustedContent": "Trusted Content",
-    "community": "Community"
+    "community": "Community",
+    "showAll": "Show All"
+  },
+  "table": {
+    "first": "Go to first page",
+    "last": "Go to last page",
+    "previous": "Go to previous page",
+    "next": "Go to next page",
+    "pageSize": "Rows per page",
+    "page": "Page",
+    "pageSeperator": "of",
+    "selected": "row(s) selected",
+    "reset": "Reset"
+  },
+  "images": {
+    "id": "id",
+    "logo": "logo",
+    "name": "name",
+    "description": "description",
+    "official": "official",
+    "data": "data",
+    "download": "download"
   }
 }

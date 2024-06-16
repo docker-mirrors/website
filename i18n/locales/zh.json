@@ -15,6 +15,27 @@
     "placeholder": "搜索镜像...",
     "loading": "搜索...",
     "trustedContent": "认证",
-    "community": "社区"
+    "community": "社区",
+    "showAll": "查看全部"
+  },
+  "table": {
+    "first": "首页",
+    "last": "尾页",
+    "previous": "上一页",
+    "next": "下一页",
+    "pageSize": "行数",
+    "page": "页",
+    "pageSeperator": "第",
+    "selected": "选中行数",
+    "reset": "重置"
+  },
+  "images": {
+    "id": "索引",
+    "logo": "图标",
+    "name": "名称",
+    "description": "描述",
+    "official": "官方",
+    "data": "数据",
+    "download": "下载"
   }
 }
