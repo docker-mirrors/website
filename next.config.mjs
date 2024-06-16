@@ -14,7 +14,10 @@ const nextConfig = {
     ]
   },
   experimental: {
-    webVitalsAttribution: ['CLS', 'LCP']
+    webVitalsAttribution: ['CLS', 'LCP'],
+    serverActions: {
+      allowedOrigins: [process.env.DOCK_HUB_HOST, process.env.GITHUB_HOST],
+    },
   },
   logging: {
     fetches: {
