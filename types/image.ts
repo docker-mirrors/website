@@ -39,7 +39,7 @@ export type CategoryItem = {
   name: string
 }
 
-export type ImageType = 'store' | 'community' | 'image'
+export type ImageType = 'store' | 'community' | 'image' | 'verified_publisher'
 
 export type ImageDetail = {
   id: string
