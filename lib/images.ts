@@ -29,22 +29,26 @@ export async function request<T = any>(sources: string, init?: RequestInit) {
 
 export function queryImages(
   tag: string,
-  type: ImageType,
+  type?: ImageType,
   payload?: {
-    size: number
-    from: number
+    size?: number
+    from?: number
     official?: boolean
     open_source?: boolean
+    images?: string
   }
 ) {
   const query = {
-    size: 4,
-    from: 0,
     ...payload,
     source: type,
     query: tag
   }
   return request<{ total: number; results: ImageDetail[] }>(
-    `api/search/v3/catalog/search?${stringify(query)}`
+    `api/search/v3/catalog/search?${stringify(query)}`,
+    {
+      next: {
+        revalidate: 20 * 60 * 1000
+      }
+    }
   )
 }

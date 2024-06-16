@@ -8,7 +8,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <IntlProvider value={{ lang: params.lang! }}>
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 p-8">{children}</main>
       <Footer />
     </IntlProvider>
   )

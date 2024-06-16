@@ -1,16 +1,9 @@
-import Image from 'next/image'
+import { queryDashboardImages } from '@/app/actions'
+import { DataTable } from '@/components/DataTable'
+import { columns } from '@/components/DataTable/columns'
 
-export default function Home() {
-  return (
-    <div>
-      <Image
-        src="/vercel.svg"
-        alt="Vercel Logo"
-        className="dark:invert"
-        width={100}
-        height={24}
-        priority
-      />
-    </div>
-  )
+export default async function Home() {
+  const dashboardImages = await queryDashboardImages()
+
+  return <DataTable data={dashboardImages ?? []} columns={columns} />
 }
