@@ -1,6 +1,10 @@
 import { stringify } from 'qs'
 import merge from 'lodash.merge'
-import type { ImageType, ImageDetail } from '@/types/image'
+import {
+  type ImageType,
+  type ImageDetail,
+  ImageDetailForTag
+} from '@/types/image'
 
 export function makeRequestSource(source: string) {
   return [process.env.DOCK_HUB_HOST, source].join('/')
@@ -48,6 +52,30 @@ export function queryImages(
     {
       next: {
         revalidate: 20 * 60 * 1000
+      }
+    }
+  )
+}
+
+export function queryImageDetailWithTag(name: string, tags?: string) {
+  return request<ImageDetailForTag>(`v2/repositories/${name}/${tags ?? ''}`, {
+    next: {
+      revalidate: 10 * 60 * 1000
+    }
+  })
+}
+
+export function queryImageDetailTags(name: string) {
+  return request<{ results: ImageDetailForTag[]; count: number }>(
+    `v2/repositories/${name}/tags?${stringify({
+      page: 1,
+      page_size: 35,
+      ordering: 'last_updated',
+      name: ''
+    })}`,
+    {
+      next: {
+        revalidate: 10 * 60 * 1000
       }
     }
   )

@@ -59,3 +59,16 @@ export type ImageDetail = {
   categories: CategoryItem[]
   rate_plans: RatePlanItem[]
 }
+
+export type ImageDetailForTag = ImageDetail & {
+  full_description: string
+  hub_user: string
+  namespace: string
+  pull_count: number
+  repository_type: ImageType
+  star_count: number
+  status: number
+  user: string
+  last_updated: string
+  content_types: ImageType[]
+}
