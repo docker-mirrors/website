@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/command'
 import { Intl, useIntl } from '@/i18n'
 import { searchImages } from '@/app/actions'
+import { Logo } from './Logo'
 
 export function useSearch() {
   const [searchResult, setSearchResult] =
@@ -36,10 +37,12 @@ export function useSearch() {
     { ...searchResult, loading: false },
     (state, loading: boolean) => ({ ...state, loading })
   )
+  const searchTag = React.useRef<string>()
 
   const { run: handleSearch } = useDebounceFn(
     async (searchSources: string) => {
       React.startTransition(() => addOptimisticLoading(true))
+      searchTag.current = searchSources
       const currentSearchResult = await searchImages(searchSources)
       console.log(currentSearchResult)
       setSearchResult(currentSearchResult)
@@ -47,7 +50,7 @@ export function useSearch() {
     { wait: 500 }
   )
 
-  return [optimisticSearchResult, handleSearch] as const
+  return [optimisticSearchResult, handleSearch, searchTag] as const
 }
 
 export function CommandMenu({ ...props }: DialogProps) {
@@ -55,7 +58,8 @@ export function CommandMenu({ ...props }: DialogProps) {
   const [open, setOpen] = React.useState(false)
   const { setTheme } = useTheme()
   const [, { formatMessage }] = useIntl()
-  const [{ loading, stores = [], communities = [] }, handleSearch] = useSearch()
+  const [{ loading, stores, communities }, handleSearch, searchTag] =
+    useSearch()
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -112,7 +116,7 @@ export function CommandMenu({ ...props }: DialogProps) {
           <CommandEmpty>
             <Intl locale="search.notFound" />
           </CommandEmpty>
-          {stores.length ? (
+          {stores?.results?.length ? (
             <CommandGroup
               heading={
                 <span className="flex items-center">
@@ -121,23 +125,41 @@ export function CommandMenu({ ...props }: DialogProps) {
                 </span>
               }
             >
-              {stores.map(({ name, id, type }) => (
+              {stores.results.map(({ name, id, type, logo_url }) => (
                 <CommandItem
                   key={id}
                   value={name}
                   onSelect={() => {
                     runCommand(() =>
-                      router.push(`/${type}/${encodeURIComponent(id)}`)
+                      router.push(`/detail/${type}/${encodeURIComponent(id)}`)
                     )
                   }}
                 >
-                  <LayersIcon className="mr-2 h-4 w-4" />
-                  {name}
+                  <Logo src={logo_url?.small} />
+                  <span className="ml-2">{name}</span>
                 </CommandItem>
               ))}
+              <CommandItem
+                value="trustedContent"
+                key="trustedContent"
+                onSelect={() => {
+                  runCommand(() =>
+                    router.push(
+                      `/search/store/${encodeURIComponent(
+                        searchTag.current ?? ''
+                      )}`
+                    )
+                  )
+                }}
+              >
+                <LayersIcon className="mr-2 h-4 w-4" />
+                <Intl locale="search.showAll" />
+                <Intl locale="search.trustedContent" />
+                {stores.total}
+              </CommandItem>
             </CommandGroup>
           ) : null}
-          {communities.length ? (
+          {communities?.results?.length ? (
             <CommandGroup
               heading={
                 <span className="flex items-center">
@@ -146,20 +168,38 @@ export function CommandMenu({ ...props }: DialogProps) {
                 </span>
               }
             >
-              {communities.map(({ name, id, type }) => (
+              {communities.results.map(({ name, id, type, logo_url }) => (
                 <CommandItem
                   key={id}
                   value={name}
                   onSelect={() => {
                     runCommand(() =>
-                      router.push(`/${type}/${encodeURIComponent(id)}`)
+                      router.push(`/detail/${type}/${encodeURIComponent(id)}`)
                     )
                   }}
                 >
-                  <LayersIcon className="mr-2 h-4 w-4" />
-                  {name}
+                  <Logo src={logo_url?.small} />
+                  <span className="ml-2">{name}</span>
                 </CommandItem>
               ))}
+              <CommandItem
+                key="community"
+                value="community"
+                onSelect={() => {
+                  runCommand(() =>
+                    router.push(
+                      `/search/community/${encodeURIComponent(
+                        searchTag.current ?? ''
+                      )}`
+                    )
+                  )
+                }}
+              >
+                <LayersIcon className="mr-2 h-4 w-4" />
+                <Intl locale="search.showAll" />
+                <Intl locale="search.community" />
+                {communities.total}
+              </CommandItem>
             </CommandGroup>
           ) : null}
           <CommandSeparator />
