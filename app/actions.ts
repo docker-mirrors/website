@@ -1,5 +1,6 @@
 'use server'
 import { queryImages } from '@/lib/images'
+import { ImageType } from '@/types/image'
 
 export async function searchImages(tag: string) {
   const stores = await queryImages(tag, 'store', { size: 4, from: 0 })
@@ -26,4 +27,17 @@ export async function queryDashboardImages() {
     })) ?? {}
 
   return dashboardImages
+}
+
+export async function queryImageBySource(
+  query: string,
+  source: ImageType,
+  page: number
+) {
+  const payload = {
+    size: 25,
+    from: (page - 1) * 25
+  }
+
+  return await queryImages(query, source, payload)
 }

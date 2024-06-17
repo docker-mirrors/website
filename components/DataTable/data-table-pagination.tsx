@@ -26,14 +26,9 @@ export function DataTablePagination<TData>({
   const [, { formatMessage }] = useIntl()
   return (
     <div className="flex items-center justify-between px-2">
-      <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length}{' '}
-        {formatMessage('table.pageSeperator')}{' '}
-        {table.getFilteredRowModel().rows.length}{' '}
-        {formatMessage('table.selected')}.
-      </div>
+      <div className="flex-1 text-sm text-muted-foreground"></div>
       <div className="flex items-center space-x-6 lg:space-x-8">
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">
             {formatMessage('table.pageSize')}
           </p>
@@ -54,7 +49,7 @@ export function DataTablePagination<TData>({
               ))}
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
           {formatMessage('table.page')}{' '}
           {table.getState().pagination.pageIndex + 1}{' '}

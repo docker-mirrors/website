@@ -4,6 +4,8 @@ import * as React from 'react'
 import {
   ColumnDef,
   ColumnFiltersState,
+  OnChangeFn,
+  PaginationState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -27,18 +29,26 @@ import {
 import { Intl } from '@/i18n'
 
 import { DataTablePagination } from './data-table-pagination'
-import { DataTableToolbar } from './data-table-toolbar'
+
+export const defaultPagination = {
+  pageIndex: 0,
+  pageSize: 25
+}
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   pagination?: boolean
+  rowCount?: number
+  onPaginationChange?: OnChangeFn<PaginationState>
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  pagination
+  pagination,
+  rowCount,
+  onPaginationChange
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -51,13 +61,18 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
+    initialState: {
+      pagination: defaultPagination
+    },
     state: {
       sorting,
       columnVisibility,
       rowSelection,
       columnFilters
     },
+    rowCount,
     enableRowSelection: true,
+    onPaginationChange,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
