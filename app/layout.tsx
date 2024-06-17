@@ -50,7 +50,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
           defaultTheme="system"
         >
           <div vaul-drawer-wrapper="">
-            <div className="relative flex min-h-screen flex-col bg-background">
+            <div className="relative flex h-screen flex-col bg-background">
               {children}
             </div>
           </div>
