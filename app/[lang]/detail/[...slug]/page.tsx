@@ -2,6 +2,8 @@ import { ImageDetail } from '@/components/ImageDetail'
 import { queryImageDetailTags, queryImageDetailWithTag } from '@/lib/images'
 import { hl } from '@/lib/hl'
 
+export const runtime = 'edge';
+
 export type DetailProps = {
   params: {
     slug: string[]
