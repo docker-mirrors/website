@@ -14,6 +14,8 @@ type SearchProps = {
   }
 }
 
+export const runtime = 'edge';
+
 function useSearch() {
   const [page, changePage] = useState<PaginationState>({ ...defaultPagination })
   const { slug } = useParams<SearchProps['params']>()
