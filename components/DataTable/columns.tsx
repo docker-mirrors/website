@@ -18,6 +18,7 @@ import {
 import { LinkCommand } from '../LinkCommand'
 import { Logo } from '../Logo'
 import Link from 'next/link'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 
 export const columns: ColumnDef<ImageDetail>[] = [
   {
@@ -63,12 +64,22 @@ export const columns: ColumnDef<ImageDetail>[] = [
       const label = IMAGETYPE.find((label) => label.value === row.original.type)
 
       return (
-        <div className="flex space-x-2">
+        <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+          <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue('short_description')}
           </span>
         </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{row.getValue('short_description')}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       )
     }
   },
