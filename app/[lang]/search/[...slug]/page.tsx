@@ -14,7 +14,7 @@ export type SearchProps = {
   }
 }
 
-export function useSearch() {
+function useSearch() {
   const [page, changePage] = useState<PaginationState>({ ...defaultPagination })
   const { slug } = useParams<SearchProps['params']>()
   const [searchResult, setSearchResult] =
