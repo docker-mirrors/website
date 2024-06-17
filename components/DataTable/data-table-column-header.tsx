@@ -29,7 +29,7 @@ export function DataTableColumnHeader<TData, TValue>({
   className
 }: DataTableColumnHeaderProps<TData, TValue>) {
   return (
-    <div className={cn(className)}>
+    <div className={cn("whitespace-nowrap",className)}>
       <Intl locale={title} />
     </div>
   )
