@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { defaultLocales, locales, type Locale } from '@/i18n'
 
 import './globals.css'
+import { TailwindIndicator } from '@/components/tailwind-indicator'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
               {children}
             </div>
           </div>
+          <TailwindIndicator/>
         </ThemeProvider>
       </body>
     </html>
