@@ -1,5 +1,5 @@
 import { NextMiddleware, MiddlewareConfig, NextResponse } from 'next/server'
-import { redirectLocale } from '@/i18n'
+import { redirectLocale } from '@/i18n/utils/middleware'
 
 export const middleware: NextMiddleware = (request, event) => {
   // locale
