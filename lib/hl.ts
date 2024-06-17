@@ -1,17 +1,21 @@
 import MarkdownIt from 'markdown-it'
-import Shiki from '@shikijs/markdown-it'
+import hljs from 'highlight.js'
+
+const md = MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value
+      } catch (__) {}
+    }
+
+    return '' // use external default escaping
+  }
+})
 
 export async function hl(code: string) {
-  const md = MarkdownIt()
-
-  md.use(
-    await Shiki({
-      themes: {
-        light: 'vitesse-light',
-        dark: 'vitesse-dark'
-      }
-    })
-  )
-
   return md.render(code)
 }

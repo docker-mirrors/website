@@ -1,13 +1,20 @@
 import { ImageDetail } from '@/components/ImageDetail'
 import { queryImageDetailTags, queryImageDetailWithTag } from '@/lib/images'
 import { hl } from '@/lib/hl'
+import { Metadata } from 'next'
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
-export type DetailProps = {
+type DetailProps = {
   params: {
     slug: string[]
   }
+}
+
+export async function generateMetadata({ params }: DetailProps) {
+  return {
+    title: decodeURIComponent(params.slug[1])
+  } as Metadata
 }
 
 export default async function Detail({ params: { slug } }: DetailProps) {
@@ -22,11 +29,10 @@ export default async function Detail({ params: { slug } }: DetailProps) {
     }
   })
   return (
-    <div className="flex-1">
-      <ImageDetail
-        tags={tags?.results ?? []}
-        detail={details?.full_description ?? ''}
-      />
-    </div>
+    <ImageDetail
+      tags={tags?.results ?? []}
+      logo={details.logo_url?.large}
+      detail={details?.full_description ?? ''}
+    />
   )
 }

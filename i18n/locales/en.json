@@ -36,6 +36,8 @@
     "description": "description",
     "official": "official",
     "data": "data",
-    "download": "download"
+    "download": "download",
+    "copyMessage": "copy success!",
+    "selectTag": "Select tag for copy..."
   }
 }

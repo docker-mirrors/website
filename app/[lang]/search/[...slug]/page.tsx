@@ -1,5 +1,5 @@
 'use client'
-import { useOptimistic, useState, startTransition, useEffect } from 'react'
+import { useOptimistic, useState, startTransition } from 'react'
 import { DataTable, defaultPagination } from '@/components/DataTable'
 import { columns } from '@/components/DataTable/columns'
 import { useDebounceEffect, useMemoizedFn } from 'ahooks'
@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation'
 import { ImageType } from '@/types/image'
 import { PaginationState } from '@tanstack/react-table'
 
-export type SearchProps = {
+type SearchProps = {
   params: {
     slug: string[]
   }

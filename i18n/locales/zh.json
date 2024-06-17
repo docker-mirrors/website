@@ -36,6 +36,8 @@
     "description": "描述",
     "official": "官方",
     "data": "数据",
-    "download": "下载"
+    "download": "下载",
+    "copyMessage": "复制成功！",
+    "selectTag": "选择复制标签..."
   }
 }
