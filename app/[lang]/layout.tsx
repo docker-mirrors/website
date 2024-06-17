@@ -10,7 +10,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
     <IntlProvider value={{ lang: params.lang! }}>
       <Header />
       <ScrollArea className="grow">
-        <main className="p-8">{children}</main>
+        <main className="p-8 pt-0">{children}</main>
       </ScrollArea>
       <Footer />
     </IntlProvider>

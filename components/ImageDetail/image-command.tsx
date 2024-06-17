@@ -20,7 +20,7 @@ export function ImageCommand({ displayTag }: ImageCommandProps) {
     const tag = displayTag ? `:${displayTag.name}` : ''
     return `${
       process.env.NEXT_PUBLIC_DOCKER_REPLY_REGISTRY
-    }/${decodeURIComponent(params.slug[1])}?${tag}`
+    }/${decodeURIComponent(params.slug[1])}${tag}`
   }, [params, displayTag])
 
   const handleCopy = useMemoizedFn(() => {
@@ -39,7 +39,6 @@ export function ImageCommand({ displayTag }: ImageCommandProps) {
         ) {
           return
         }
-
         e.preventDefault()
         handleCopy()
       }
