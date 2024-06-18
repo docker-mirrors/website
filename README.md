@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a href="https://dataclient.io" target="_blank" rel="noopener"><img src="https://github.com/docker-mirrors/website/raw/main/public/docker_reply_logo_and_text.svg" alt="Docker Mirror Logo" style="max-width: 100%;"></a>
 
-## Getting Started
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/docker-mirrors/website.svg)](http://isitmaintained.com/project/docker-mirrors/website 'Percentage of issues still open')
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/docker-mirrors/website.svg)](http://isitmaintained.com/project/docker-mirrors/website 'Average time to resolve an issue')
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-First, run the development server:
+Accelerate mirror downloads. Unlocks download restrictions. Support for searching domestic mirrors - [docker-mirrors](https://dockermirror.com).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<div align="center">
+
+## 🌎 [Website](https://dockermirror.com)
+
+</div>
+
+<div align="center">
+
+**[📖Read The Docs](https://dockermirror.com/docs)** &nbsp;|&nbsp; [😶‍🌫️Searching Images](https://dockermirror.comn)
+
+</div>
+
+## Features
+
+- [x] 💥 Fast connect
+- [x] 🛑 Automatic cache
+- [x] ✨ [accessible website](https://dockermirror.com)
+- [x] 👯 Team update
+
+## Usage
+
+### Docker File Mirror Setting
+
+edit `/etc/docker/daemon.json` and add the [registry-mirror](https://docs.docker.com/docker-hub/mirror/#configure-the-docker-daemon) key and value, to make the change persistent.
+
+```json
+{
+  "registry-mirrors": ["https://registry.dockermirror.com"]
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For more details, see [docker docs](https://docs.docker.com/docker-hub/mirror/#configure-the-docker-daemon).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+If you are the user of orbstack. You can also edit the config directly at `~/.orbstack/config/docker.json` and restart the engine with `orb restart docker`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```json
+{
+  "hosts": ["https://registry.dockermirror.com"]
+}
+```
 
-## Learn More
+For more orb details, see [orb docs](https://docs.orbstack.dev/docker/#engine-config).
 
-To learn more about Next.js, take a look at the following resources:
+### Pass options
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+pass the --registry-mirror option when starting dockerd manually, to make the change persistent.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+$ docker pull ubuntu --registry-mirror=https://registry.dockermirror.com
+```
 
-## Deploy on Vercel
+For more details, see [docker pull docs](https://docs.docker.com/reference/cli/docker/image/pull/?highlight=docker&highlight=pull).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Direct Use Registry
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+manually specify the path of a registry to pull from. A registry path is similar to a URL, but does not contain a protocol specifier (https://).
+
+```bash
+$ docker pull registry.dockermirror.com/ubuntu
+```
+
+For more details, see [docker pull-from-a-different-registry docs](https://docs.docker.com/reference/cli/docker/image/pull/?highlight=docker&highlight=pull#pull-from-a-different-registry).
+
+## Support
+
+Support Us for better services！！
+
+<table>
+  <tr align="center">
+    <td>
+      <a href="https://afdian.net/order/create?plan_id=1034de202d3f11ef8b0b52540025c377&product_type=0&remark=" target="_blank">
+        <img width="150" src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2022-12-04/1670124736895-afdian.png">
+      </a>
+    </td>
+  </tr>
+</table>

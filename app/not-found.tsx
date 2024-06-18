@@ -1,24 +1,24 @@
-import Link from 'next/link'
-import { CircleIcon, StarIcon, ArrowLeftIcon } from '@radix-ui/react-icons'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Button } from '@/components/ui/button'
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card'
-import { site } from '@/constants/site'
-import dayjs from 'dayjs'
+  CardTitle,
+} from '@/components/ui/card';
+import { site } from '@/constants/site';
+import { ArrowLeftIcon, CircleIcon, StarIcon } from '@radix-ui/react-icons';
+import dayjs from 'dayjs';
+import Link from 'next/link';
 
 export default async function NotFound() {
   const repo = await fetch(
-    `${process.env.GITHUB_HOST}/repos/docker-reply/website`,
-    { next: { revalidate: 60 * 3 * 60 * 1000 } }
+    `${process.env.GITHUB_HOST}/repos/docker-mirrors/website`,
+    { next: { revalidate: 60 * 3 * 60 * 1000 } },
   )
     .then((response) => response.json())
-    .then((response) => (!response.message ? response : {}))
+    .then((response) => (!response.message ? response : {}));
 
   return (
     <AspectRatio
@@ -61,5 +61,5 @@ export default async function NotFound() {
         </Button>
       </Link>
     </AspectRatio>
-  )
+  );
 }

@@ -1,8 +1,8 @@
 export const site = {
-  name: 'docker reply',
+  name: 'Docker Mirror',
   description: 'Fast server with docker images',
   links: {
-    github: 'https://github.com/docker-reply/website',
-    org: 'https://github.com/docker-reply'
-  }
-}
+    github: 'https://github.com/docker-mirrors/website',
+    org: 'https://github.com/docker-mirrors',
+  },
+};

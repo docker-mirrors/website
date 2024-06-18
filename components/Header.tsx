@@ -1,11 +1,11 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { site } from '@/constants/site'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
-import { GitHubLogoIcon } from '@radix-ui/react-icons'
-import { ModeToggle } from './ModeToggle'
-import { CommandMenu } from './CommandMenu'
+import { buttonVariants } from '@/components/ui/button';
+import { site } from '@/constants/site';
+import { cn } from '@/lib/utils';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import Link from 'next/link';
+import { CommandMenu } from './CommandMenu';
+import { ModeToggle } from './ModeToggle';
 
 export const Header = () => {
   return (
@@ -14,8 +14,8 @@ export const Header = () => {
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Image
-              src="/docker-reply.svg"
-              alt="docker-reply Logo"
+              src="/docker-mirrors.svg"
+              alt="docker-mirrors Logo"
               width={24}
               height={24}
               priority
@@ -33,9 +33,9 @@ export const Header = () => {
               <div
                 className={cn(
                   buttonVariants({
-                    variant: 'ghost'
+                    variant: 'ghost',
                   }),
-                  'w-9 px-0'
+                  'w-9 px-0',
                 )}
               >
                 <GitHubLogoIcon className="h-4 w-4" />
@@ -47,5 +47,5 @@ export const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
