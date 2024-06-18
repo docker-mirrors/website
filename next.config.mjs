@@ -1,5 +1,15 @@
+import withMDX from '@next/mdx'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+const mdxs = {
+  en: readFileSync(resolve(import.meta.dirname, 'README.md'), { encoding: 'utf-8' }),
+  zh: readFileSync(resolve(import.meta.dirname, 'README.CN.md'), { encoding: 'utf-8' }),
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async headers() {
     return [
       {
@@ -13,11 +23,15 @@ const nextConfig = {
       }
     ]
   },
+  env: {
+    mdxs: JSON.stringify(mdxs)
+  },
   experimental: {
     webVitalsAttribution: ['CLS', 'LCP'],
     serverActions: {
       allowedOrigins: [process.env.DOCK_HUB_HOST, process.env.GITHUB_HOST],
     },
+    mdxRs: true
   },
   logging: {
     fetches: {
@@ -29,4 +43,6 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withMDX({
+  extension: /\.(md|mdx)$/,
+})(nextConfig);

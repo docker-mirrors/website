@@ -1,4 +1,4 @@
-<a href="https://dockermirror.com" target="_blank" rel="noopener"><img src="https://github.com/docker-mirrors/website/raw/main/public/docker_mirrors_logo_and_text.svg" alt="Docker Mirror Logo" style="max-width: 100%;"></a>
+<a href="https://dockermirror.com" target="_blank" rel="noopener"><img src="https://github.com/docker-mirrors/website/raw/main/public/docker_mirrors_logo_and_text.png?sanitize=true" alt="Docker Mirror Logo" style="max-width: 100%;" /></a>
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/docker-mirrors/website.svg)](http://isitmaintained.com/project/docker-mirrors/website 'Percentage of issues still open')
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/docker-mirrors/website.svg)](http://isitmaintained.com/project/docker-mirrors/website 'Average time to resolve an issue')
@@ -7,8 +7,6 @@
 加速镜像下载. 解除下载限制. 配套国内搜索镜像网站 - [docker-mirrors](https://dockermirror.com).
 
 ## 🌎 [Website](https://dockermirror.com)
-
-</div>
 
 <div align="center">
 
@@ -74,7 +72,7 @@ $ docker pull registry.dockermirror.com/ubuntu
   <tr align="center">
     <td>
       <a href="https://afdian.net/order/create?plan_id=1034de202d3f11ef8b0b52540025c377&product_type=0&remark=" target="_blank">
-        <img width="150" src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2022-12-04/1670124736895-afdian.png">
+        <img width="150" src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2022-12-04/1670124736895-afdian.png" />
       </a>
     </td>
   </tr>
