@@ -1,0 +1,16 @@
+{
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "proseWrap": "never",
+  "overrides": [
+    { "files": ".prettierrc", "options": { "parser": "json" } },
+    {
+      "files": "*.md",
+      "options": {
+        "proseWrap": "preserve"
+      }
+    }
+  ],
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-packagejson"]
+}
