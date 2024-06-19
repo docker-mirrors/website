@@ -1,24 +1,28 @@
-'use client'
+'use client';
 
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/components/ui/badge';
 
-import { IMAGETYPE } from '@/constants/images'
-import { ImageDetail } from '@/types/image'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
+import { IMAGETYPE } from '@/constants/images';
+import { ImageDetail } from '@/types/image';
 import {
   CheckCircledIcon,
   DownloadIcon,
   FaceIcon,
   QuestionMarkCircledIcon,
-  StarIcon
-} from '@radix-ui/react-icons'
-import { LinkCommand } from '../LinkCommand'
-import { Logo } from '../Logo'
-import Link from 'next/link'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
+  StarIcon,
+} from '@radix-ui/react-icons';
+import { LangLink } from '../LangLink';
+import { LinkCommand } from '../LinkCommand';
+import { Logo } from '../Logo';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip';
+import { DataTableColumnHeader } from './data-table-column-header';
 
 export const columns: ColumnDef<ImageDetail>[] = [
   {
@@ -31,10 +35,10 @@ export const columns: ColumnDef<ImageDetail>[] = [
         <div className="w-10">
           <Logo src={row.original.logo_url?.small} />
         </div>
-      )
+      );
     },
     enableSorting: false,
-    enableHiding: false
+    enableHiding: false,
   },
   {
     accessorKey: 'name',
@@ -43,17 +47,17 @@ export const columns: ColumnDef<ImageDetail>[] = [
     ),
     cell: ({ row }) => (
       <div className="w-[80px]">
-        <Link
+        <LangLink
           href={`/detail/${row.original.type}/${encodeURIComponent(
-            row.original.id
+            row.original.id,
           )}`}
         >
           {row.getValue('name')}
-        </Link>
+        </LangLink>
       </div>
     ),
     enableSorting: false,
-    enableHiding: false
+    enableHiding: false,
   },
   {
     accessorKey: 'short_description',
@@ -61,27 +65,28 @@ export const columns: ColumnDef<ImageDetail>[] = [
       <DataTableColumnHeader column={column} title="images.description" />
     ),
     cell: ({ row }) => {
-      const label = IMAGETYPE.find((label) => label.value === row.original.type)
+      const label = IMAGETYPE.find(
+        (label) => label.value === row.original.type,
+      );
 
       return (
         <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-          <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue('short_description')}
-          </span>
-        </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{row.getValue('short_description')}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-
-      )
-    }
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex space-x-2">
+                {label && <Badge variant="outline">{label.label}</Badge>}
+                <span className="max-w-[500px] truncate font-medium">
+                  {row.getValue('short_description')}
+                </span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{row.getValue('short_description')}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    },
   },
   {
     accessorKey: 'official',
@@ -90,23 +95,23 @@ export const columns: ColumnDef<ImageDetail>[] = [
     ),
     cell: ({ row }) => {
       const isOfficial =
-        !!row.original.rate_plans?.[0]?.repositories?.[0]?.is_official
-      const verified = row.original.source === 'verified_publisher'
+        !!row.original.rate_plans?.[0]?.repositories?.[0]?.is_official;
+      const verified = row.original.source === 'verified_publisher';
 
       const OfficialIcon = isOfficial
         ? CheckCircledIcon
         : verified
-        ? FaceIcon
-        : QuestionMarkCircledIcon
+          ? FaceIcon
+          : QuestionMarkCircledIcon;
       return (
         <div className="flex w-4 items-center">
           <OfficialIcon className="h-4 w-4 text-muted-foreground" />
         </div>
-      )
+      );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    }
+      return value.includes(row.getValue(id));
+    },
   },
   {
     accessorKey: 'star_count',
@@ -114,9 +119,9 @@ export const columns: ColumnDef<ImageDetail>[] = [
       <DataTableColumnHeader column={column} title="images.data" />
     ),
     cell: ({ row }) => {
-      const starCount = row.getValue<number>('star_count')
+      const starCount = row.getValue<number>('star_count');
       const pullCount =
-        row.original.rate_plans?.[0]?.repositories?.[0]?.pull_count
+        row.original.rate_plans?.[0]?.repositories?.[0]?.pull_count;
 
       return (
         <div className="flex items-center">
@@ -125,17 +130,17 @@ export const columns: ColumnDef<ImageDetail>[] = [
           <DownloadIcon className="mx-2 h-4 w-4 text-muted-foreground" />
           <span>{pullCount}</span>
         </div>
-      )
+      );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    }
+      return value.includes(row.getValue(id));
+    },
   },
   {
     accessorKey: 'id',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="images.download" />
     ),
-    cell: ({ row }) => <LinkCommand id={row.getValue('id')} tooltip />
-  }
-]
+    cell: ({ row }) => <LinkCommand id={row.getValue('id')} tooltip />,
+  },
+];

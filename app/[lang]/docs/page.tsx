@@ -1,7 +1,6 @@
 import { md } from '@/lib/hl';
 
 const mdxs = JSON.parse(process.env.mdxs ?? '');
-console.log(mdxs);
 
 export const runtime = 'edge';
 
