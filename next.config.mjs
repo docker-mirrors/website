@@ -23,6 +23,22 @@ const nextConfig = {
       }
     ]
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.cloudfront.net',
+        port: '',
+        pathname: '/repo-logos/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.gravatar.com',
+        port: '',
+        pathname: '/avatar/**',
+      },
+    ],
+  },
   env: {
     mdxs: JSON.stringify(mdxs)
   },

@@ -8,15 +8,15 @@ export type LogoProps = {
 
 export function Logo({ src = '/docker-mirrors.svg', size = 24 }: LogoProps) {
   const imageProps = useMemo(() => {
-    if (src.startsWith('http')) {
-      const source = src.replace(new URL(src).origin, '');
-      return {
-        src: source,
-        loader: () => {
-          return src;
-        },
-      };
-    }
+    // if (src.startsWith('http')) {
+    //   const source = src.replace(new URL(src).origin, '');
+    //   return {
+    //     src: source,
+    //     loader: () => {
+    //       return src;
+    //     },
+    //   };
+    // }
 
     return {
       src,
@@ -26,6 +26,7 @@ export function Logo({ src = '/docker-mirrors.svg', size = 24 }: LogoProps) {
     <Image
       priority
       {...imageProps}
+      referrerPolicy="no-referrer"
       width={size}
       height={size}
       alt={imageProps.src}
