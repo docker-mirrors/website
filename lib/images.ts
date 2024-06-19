@@ -12,6 +12,7 @@ export function makeRequestSource(source: string) {
 
 export async function request<T = any>(sources: string, init?: RequestInit) {
   const url = makeRequestSource(sources);
+
   try {
     const serverResponse = await fetch(
       url,
@@ -27,7 +28,7 @@ export async function request<T = any>(sources: string, init?: RequestInit) {
     const jsonResponse = await serverResponse.json();
     return jsonResponse as T;
   } catch (e) {
-    console.log(e);
+    console.log('request error', url, e);
   }
 }
 
@@ -44,7 +45,7 @@ export function queryImages(
 ) {
   const query = {
     ...payload,
-    source: type,
+    type: type,
     query: tag,
   };
   return request<{ total: number; results: ImageDetail[] }>(
@@ -73,7 +74,7 @@ export function queryImageOrgDetailWithTag(name: string, tags?: string) {
   });
 }
 
-export function queryImageDetailTags(name: string) {
+export function queryImageTags(name: string) {
   return request<{ results: ImageDetailForTag[]; count: number }>(
     `v2/repositories/${name}/tags?${stringify({
       page: 1,
