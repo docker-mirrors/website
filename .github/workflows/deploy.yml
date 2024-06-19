@@ -1,0 +1,34 @@
+name: deploy
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.14.0]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8.10.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build Website
+        run: pnpm build
+      - run: echo "build success!!"
+      - run: echo "Install sshpass!"
+      - run: apt-get update -y
+      - run: apt-get -y install sshpass
+      - run: echo "upload dist to service..."
+      # - name: Upload Services
+      #   run: sshpass -p "$HOST_PASSWORD" scp -v -o "StrictHostKeyChecking no" -r ./.next/* ${{ vars.HOST_USER }}@${{ vars.HOST_IP }}:${{ vars.HOST_PUBLIC_PATH }}/
+      # - name: Restart Services
+      #   run: sshpass -p "$HOST_PASSWORD" ssh ${{ vars.HOST_USER }}@${{ vars.HOST_IP }} -o "StrictHostKeyChecking no" "sh restart.sh"
