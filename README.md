@@ -6,6 +6,8 @@
 
 Accelerate mirror downloads. Unlocks download restrictions. Support for searching domestic mirrors - [docker-mirrors](https://dockermirror.com).
 
+<a href="https://dockermirror.com" target="_blank" rel="noopener"><video src="https://github.com/docker-mirrors/website/raw/main/public/docker-mirrors-example.mp4?sanitize=true" alt="Docker Mirror Logo" style="max-width: 100%;"></video></a>
+
 <div align="center">
 
 ## 🌎 [Website](https://dockermirror.com)
