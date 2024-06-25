@@ -149,6 +149,9 @@ dependencies:
   markdown-it:
     specifier: ^14.1.0
     version: 14.1.0
+  markdown-it-task-lists:
+    specifier: ^2.1.1
+    version: 2.1.1
   negotiator:
     specifier: ^0.6.3
     version: 0.6.3
@@ -4095,6 +4098,10 @@ packages:
   /markdown-extensions@2.0.0:
     resolution: {integrity: sha512-o5vL7aDWatOTX8LzaS1WMoaoxIiLRQJuIKKe2wAw6IeULDHaqbiqiggmx+pKvZDb1Sj+pE46Sn1T7lCqfFtg1Q==}
     engines: {node: '>=16'}
+    dev: false
+
+  /markdown-it-task-lists@2.1.1:
+    resolution: {integrity: sha512-TxFAc76Jnhb2OUu+n3yz9RMu4CwGfaT788br6HhEDlvWfdeJcLUsxk1Hgw2yJio0OXsxv7pyIPmvECY7bMbluA==}
     dev: false
 
   /markdown-it@14.1.0:
