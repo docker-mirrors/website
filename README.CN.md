@@ -6,7 +6,7 @@
 
 加速镜像下载. 解除下载限制. 配套国内搜索镜像网站 - [docker-mirrors](https://dockermirror.com).
 
-<a href="https://dockermirror.com" target="_blank" rel="noopener"><video src="https://github.com/docker-mirrors/website/raw/main/public/docker-mirrors-example.mp4?sanitize=true" alt="Docker Mirror Logo" style="max-width: 100%;"></video></a>
+<a href="https://dockermirror.com" target="_blank" rel="noopener"><video style="max-width: 100%;" controls><source src="https://github.com/docker-mirrors/website/raw/main/public/docker-mirrors-example.mp4?sanitize=true"></source></video></a>
 
 ## 🌎 [Website](https://dockermirror.com)
 
