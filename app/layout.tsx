@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@/components/ThemeProvider';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
 import { defaultLocales, locales, type Locale } from '@/i18n';
 import { cn } from '@/lib/utils';
@@ -57,6 +58,11 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
           </div>
           <TailwindIndicator />
         </ThemeProvider>
+        <Script
+          async
+          src="https://u.pexni.com/script.js"
+          data-website-id="bfd73582-ebd7-4995-9e3d-9b05f941edbb"
+        />
       </body>
     </html>
   );
