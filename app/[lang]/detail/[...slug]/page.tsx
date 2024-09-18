@@ -1,9 +1,9 @@
 import { ImageDetail } from '@/components/ImageDetail';
 import { hl } from '@/lib/hl';
 import {
-  queryImageDetailTags,
   queryImageDetailWithTag,
   queryImageOrgDetailWithTag,
+  queryImageTags,
 } from '@/lib/images';
 import { Metadata } from 'next';
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: DetailProps) {
 }
 
 export default async function Detail({ params: { slug } }: DetailProps) {
-  const tags = await queryImageDetailTags(decodeURIComponent(slug[1]));
+  const tags = await queryImageTags(decodeURIComponent(slug[1]));
   const details = await queryImageDetailWithTag(
     decodeURIComponent(slug[1]),
   ).then(async (response) => {
