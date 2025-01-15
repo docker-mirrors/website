@@ -45,7 +45,7 @@ If you are the user of orbstack. You can also edit the config directly at `~/.or
 
 ```json
 {
-  "hosts": ["https://registry.dockermirror.com"]
+  "registry-mirrors": ["https://registry.dockermirror.com"]
 }
 ```
 
